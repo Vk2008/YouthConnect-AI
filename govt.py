@@ -8,25 +8,11 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import warnings
 warnings.filterwarnings('ignore')
 
-initiatives = pd.read_csv(r'C:\Users\Harish\OneDrive\Desktop\policy\initiatives.csv', sep = ',') #file with the actions to be taken
-#print(initiatives.info())
-# print(initiatives.head())
+initiatives = pd.read_csv('initiatives.csv', sep = ',') #file with the actions to be taken
 
-#print(initiatives.section.unique())
 
-# policies = initiatives.groupby('section')
-# food = policies.get_group('Food')
-# waste = policies.get_group('Waste')
-# energy = policies.get_group('Energy')
-# water = policies.get_group('Water')
-# climate = policies.get_group('Climate')
-# trans = policies.get_group('Transportation')
-# land = policies.get_group('Land Use')
+issues = pd.read_csv('user_data.csv', sep = ',') #file with the user replies
 
-#print(climate)
-
-issues = pd.read_csv(r'C:\Users\Harish\OneDrive\Desktop\policy\user_data.csv', sep = ',') #file with the user replies
-#print(issues.head())
 rows = len(issues)
 a = 'Number of respondents: '+ str(rows)
 
@@ -35,7 +21,6 @@ group_issues = issues.groupby('issues_faced_in') #groups data based on same valu
 issue_counts = group_issues.size() #size (no of entries) of each group
 issue_counts = issue_counts.reset_index() #indexing resets from 0
 issue_counts.columns = ['issues_faced_in', 'count'] #name of columns
-# print(issue_counts.head())
 
 max_num = issue_counts['count'].idxmax() #max count
 priority = issue_counts.loc[max_num, 'issues_faced_in'] #most voted issue
@@ -110,4 +95,5 @@ button_graph.place(x=250,y=450,width=200,height=50)
 
 
 switch_to_home_screen()
+
 root.mainloop()
